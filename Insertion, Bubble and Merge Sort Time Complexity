@@ -1,0 +1,201 @@
+import random
+
+import time
+
+import matplotlib.pyplot as plt
+
+
+def random_list(n):
+
+
+    ls=[]
+
+    
+
+    
+
+    for x in range(n):
+
+
+        ls.append(random.randint(0,n*3))
+
+    
+
+    return ls
+
+def insertionSort(arr): 
+
+    a=time.clock()  
+
+ 
+
+    for i in range(1, len(arr)): 
+
+  
+
+        key = arr[i] 
+
+  
+
+        
+
+        j = i-1
+
+        while j >=0 and key < arr[j] : 
+
+                arr[j+1] = arr[j] 
+
+                j -= 1
+
+        arr[j+1] = key 
+
+    b=time.clock()
+
+    return b-a
+
+
+def bubble_sort(n,ls):
+
+    a=time.clock()
+
+ 
+
+    for i in range(n): 
+
+  
+
+        f=False
+
+        for j in range(0, n-i-1): 
+
+  
+
+             
+
+            if ls[j] > ls[j+1] : 
+
+                ls[j], ls[j+1] = ls[j+1], ls[j]
+
+                f=True
+
+        if f==False:
+
+          break
+
+    b=time.clock()
+
+    return b-a
+
+def MergeSort(arr):
+    m = time.clock()
+    if len(nlist)>1:
+        mid = len(nlist)//2
+          lefthalf = nlist[:mid]
+          righthalf = nlist[mid:]
+      i=j=k=0       
+      while i < len(lefthalf) and j < len(righthalf):
+          if lefthalf[i] < righthalf[j]:
+                nlist[k]=lefthalf[i]
+                i=i+1
+            else:
+                nlist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+      while i < len(lefthalf):
+            nlist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+      while j < len(righthalf):
+            nlist[k]=righthalf[j]
+            j=j+1
+            k=k+1    
+      n = time.clock()
+      return n-m      
+
+def main():
+
+    new_ls_n=[]
+
+    new_ls_time=[]
+
+    new_ls_ni=[]
+
+    new_ls_timei=[]
+    
+    new_ls_n_1=[]
+    
+    new_ls_time1=[]
+ 
+
+    for n in range(1,250):
+
+        sum=0
+
+        sumi=0
+        
+        sum1=0
+
+        for x in range(1,4):
+
+            p=random_list(n)
+
+            pp=p.copy()
+            
+            merge_ls=p.copy()
+
+            bp=bubble_sort(n,p)
+
+            ip=insertionSort(pp)
+            
+            mg = MergeSort(merge_ls)
+
+            sum+=bp
+
+            sumi+=ip
+            
+            sum1+=mg
+
+        avg_time=sum/3
+
+        avg_timei=sumi/3
+        
+        avg_time1=sum1/3
+
+        new_ls_n.append(n)
+
+        new_ls_time.append(avg_time)
+        
+        new_ls_n_1.append(n)
+
+        new_ls_ni.append(n)
+        
+        new_ls_time1.append(avg_time1)
+
+        new_ls_timei.append(avg_timei)
+
+    labels=['Bubble Sort','Insertion Sort','Merge Sort']
+
+    plt.plot(new_ls_n,new_ls_time,label='Inline label',color='green', linestyle='solid') 
+
+    plt.plot(new_ls_ni,new_ls_timei, color='yellow',linestyle='solid')
+    
+    plt.plot(new_ls_n_1,new_ls_time1, color='blue',linestyle='solid')
+
+    plt.xlabel("Number of Inputs") 
+
+    plt.ylabel("Avg Time")  
+
+    plt.legend(labels)
+
+    plt.show()
+
+               
+
+            
+
+    
+
+main()
+
